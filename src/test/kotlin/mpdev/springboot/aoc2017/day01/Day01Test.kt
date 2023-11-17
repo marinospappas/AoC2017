@@ -31,7 +31,7 @@ class Day01Test {
 
     @Test
     @Order(2)
-    fun `Reads Input ans sets Integer List`() {
+    fun `Reads Input and sets Integer List`() {
         println(puzzleSolver.intList.toList())
         assertThat(puzzleSolver.intList.toList()).isEqualTo(listOf(1,1,2,2))
     }
@@ -57,7 +57,7 @@ class Day01Test {
         "123425,   4",
         "123123,   12",
         "12131415, 4"
-    )    @Order(3)
+    )    @Order(4)
     fun `Solves Part 2`(input: String, expected: String) {
         puzzleSolver.inputData = listOf(input)
         puzzleSolver.initSolver()
