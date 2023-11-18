@@ -39,6 +39,7 @@ class Day03Test {
     @Order(3)
     fun `Solves Part 1`(input: String, expected: String) {
         puzzleSolver.inputData = listOf(input)
+        puzzleSolver.initSolver()
         assertThat(puzzleSolver.solvePart1().result).isEqualTo(expected)
     }
 

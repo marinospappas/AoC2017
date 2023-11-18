@@ -47,3 +47,6 @@ fun min(a1: Int, a2: Int, a3: Int, a4: Int): Int {
 fun min(a1: Long, a2: Long, a3: Long, a4: Long): Long {
     return min(min(a1,a2), min(a3,a4))
 }
+
+fun String.isAnagram(other: String): Boolean =
+    this.toCharArray().toList().sorted() == other.toCharArray().toList().sorted()
