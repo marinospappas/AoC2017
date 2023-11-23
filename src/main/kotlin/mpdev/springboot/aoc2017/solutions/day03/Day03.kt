@@ -2,9 +2,7 @@ package mpdev.springboot.aoc2017.solutions.day03
 
 import mpdev.springboot.aoc2017.model.PuzzlePartSolution
 import mpdev.springboot.aoc2017.solutions.PuzzleSolver
-import mpdev.springboot.aoc2017.utils.min
 import org.springframework.stereotype.Component
-import kotlin.math.*
 import kotlin.system.measureNanoTime
 
 @Component
@@ -38,7 +36,7 @@ class Day03: PuzzleSolver() {
 
     override fun solvePart2(): PuzzlePartSolution {
         val elapsed = measureNanoTime {
-
+            result = spiral.fillSpiral()
         }
         return PuzzlePartSolution(2, result.toString(), elapsed/1000, "micro-sec")
     }

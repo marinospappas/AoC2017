@@ -46,12 +46,11 @@ class Day03Test {
     @Test
     @Order(3)
     fun `Solves Part 2`() {
-        puzzleSolver.inputData = listOf(
-            "5 9 2 8",
-            "9 4 7 3",
-            "3 8 6 5"
-        )
+        puzzleSolver.inputData = listOf("312051")
         puzzleSolver.initSolver()
-        assertThat(puzzleSolver.solvePart2().result).isEqualTo("9")
+        val result = puzzleSolver.spiral.fillSpiral()
+        puzzleSolver.spiral.printData()
+        assertThat(result).isEqualTo(312453)
     }
+
 }
