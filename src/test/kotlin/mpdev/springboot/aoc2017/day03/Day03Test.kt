@@ -45,7 +45,7 @@ class Day03Test {
 
     @Test
     @Order(3)
-    fun `Solves Part 2`() {
+    fun `Fills Spiral`() {
         puzzleSolver.inputData = listOf("312051")
         puzzleSolver.initSolver()
         val result = puzzleSolver.spiral.fillSpiral()
@@ -53,4 +53,12 @@ class Day03Test {
         assertThat(result).isEqualTo(312453)
     }
 
+    @Test
+    @Order(4)
+    fun `Solves Part 2`() {
+        puzzleSolver.inputData = listOf("312051")
+        puzzleSolver.initSolver()
+        val result = puzzleSolver.solvePart2().result
+        assertThat(result).isEqualTo("312453")
+    }
 }
