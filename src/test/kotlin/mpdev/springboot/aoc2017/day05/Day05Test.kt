@@ -2,6 +2,7 @@ package mpdev.springboot.aoc2017.day05
 
 import mpdev.springboot.aoc2017.input.InputDataReader
 import mpdev.springboot.aoc2017.solutions.day05.Day05
+import mpdev.springboot.aoc2017.solutions.day05.Instructions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Order
@@ -29,13 +30,24 @@ class Day05Test {
 
     @Test
     @Order(2)
+    fun `Executes Jump Sequence`() {
+        val instr = Instructions(inputLines)
+        println(instr.jumpOffsets)
+        assertThat(instr.jumpOffsets.size).isEqualTo(5)
+        val result = instr.executeJumpSeries1()
+        println(result)
+        assertThat(result).isEqualTo(5)
+    }
+
+    @Test
+    @Order(3)
     fun `Solves Part 1`() {
-        assertThat(puzzleSolver.solvePart1().result).isEqualTo("2")
+        assertThat(puzzleSolver.solvePart1().result).isEqualTo("5")
     }
 
     @Test
     @Order(4)
     fun `Solves Part 2`() {
-        assertThat(puzzleSolver.solvePart2().result).isEqualTo("3")
+        assertThat(puzzleSolver.solvePart2().result).isEqualTo("10")
     }
 }

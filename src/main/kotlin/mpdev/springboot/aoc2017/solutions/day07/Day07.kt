@@ -4,6 +4,7 @@ import mpdev.springboot.aoc2017.model.PuzzlePartSolution
 import mpdev.springboot.aoc2017.solutions.PuzzleSolver
 import org.springframework.stereotype.Component
 import kotlin.system.measureNanoTime
+import kotlin.system.measureTimeMillis
 
 @Component
 class Day07: PuzzleSolver() {
@@ -21,10 +22,10 @@ class Day07: PuzzleSolver() {
 
     override fun initSolver(): Pair<Long,String> {
         result = ""
-        val elapsed = measureNanoTime {
+        val elapsed = measureTimeMillis {
             programTree = ProgramTree(inputData)
         }
-        return Pair(elapsed/1000, "micro-sec")
+        return Pair(elapsed, "milli-sec")
     }
 
     override fun solvePart1(): PuzzlePartSolution {
