@@ -2,10 +2,7 @@ package mpdev.springboot.aoc2017.solutions.day07
 
 import mpdev.springboot.aoc2017.model.PuzzlePartSolution
 import mpdev.springboot.aoc2017.solutions.PuzzleSolver
-import mpdev.springboot.aoc2017.utils.isAnagram
-import mpdev.springboot.aoc2017.utils.min
 import org.springframework.stereotype.Component
-import kotlin.math.*
 import kotlin.system.measureNanoTime
 
 @Component
@@ -39,7 +36,7 @@ class Day07: PuzzleSolver() {
 
     override fun solvePart2(): PuzzlePartSolution {
         val elapsed = measureNanoTime {
-
+            result = programTree.adjustOddNodeWeight().toString()
         }
         return PuzzlePartSolution(2, result, elapsed/1000, "micro-sec")
     }
