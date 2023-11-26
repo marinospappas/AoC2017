@@ -11,7 +11,7 @@ class ProgramTree(input: List<String>) {
     var root: String
 
     init {
-        processInput(input.sorted())
+        processInput(input)
         root = tree.getRootId()
     }
 
