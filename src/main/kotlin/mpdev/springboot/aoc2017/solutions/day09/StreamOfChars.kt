@@ -33,9 +33,9 @@ class StreamOfChars(input: List<String>) {
                 return@forEach
             }
             when (c) {
-                BEGIN_GROUP-> ++level
-                END_GROUP-> { sumOfScores += level; --level }
-                BEGIN_GRBG-> garbage = true
+                BEGIN_GROUP -> ++level
+                END_GROUP -> { sumOfScores += level; --level }
+                BEGIN_GRBG -> garbage = true
             }
         }
         return Pair(sumOfScores,garbageCount)
