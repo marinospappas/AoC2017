@@ -19,7 +19,7 @@ class ProgramTree(input: List<String>) {
         var current = root
         var prevDiff = 0
         while (true) {
-            val weights = tree[current].getConnectedNodes().map { it.nodeId to calculateBranchWeight(it.nodeId) }.toMap()
+            val weights = tree[current].getConnectedNodes().associate { it.nodeId to calculateBranchWeight(it.nodeId) }
             val (oddNodeId, oddNodeDiff) = identifyNodeOfDiffWeight(weights)
             if (oddNodeId.isNotEmpty()) {
                 prevDiff = oddNodeDiff
