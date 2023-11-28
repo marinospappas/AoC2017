@@ -11,6 +11,15 @@ class CircularList<T>(val data: MutableList<T>) {
         data[index] = value
     }
 
+    fun indexOf(value: T) = data.indexOf(value)
+
+    fun getCurrent() = data[curPos]
+
+    fun insert(index: Int, value: T) {
+        data.add(index, value)
+        curPos = index
+    }
+
     fun incrCurPos(incr: Int) {
         curPos = (curPos + incr) % data.size
     }
