@@ -39,4 +39,11 @@ class KnotHash(input: List<String>) {
         }
         return result.joinToString("") { "%02x".format(it) }
     }
+
+    companion object {
+        fun compute(input: String): String {
+            val knotHash = KnotHash(listOf(input))
+            return knotHash.denseHash(knotHash.sparseHash())
+        }
+    }
 }

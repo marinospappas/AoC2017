@@ -78,5 +78,8 @@ class Day10Test {
         puzzleSolver.inputData = listOf(input)
         puzzleSolver.initSolver()
         assertThat(puzzleSolver.solvePart2().result).isEqualTo(expected)
+        val knotHash = KnotHash.compute(input)
+        assertThat(knotHash).isEqualTo(expected)
     }
+
 }
