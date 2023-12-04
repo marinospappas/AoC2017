@@ -1,17 +1,22 @@
 package mpdev.springboot.aoc2017.solutions.day07
 
-import mpdev.springboot.aoc2017.utils.AocException
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import mpdev.springboot.aoc2017.utils.Bfs
 import mpdev.springboot.aoc2017.utils.Graph
 
 class ProgramTree(input: List<String>) {
 
+    val programs = Json.decodeFromString<List<Program>>(
+        input.joinToString(",", "[", "]") {it.toJson()}
+    )
     val weightMap = mutableMapOf<String,Int>()
     val tree = Graph<String>()
     var root: String
 
     init {
-        processInput(input)
+        processPrograms()
         root = tree.getRootId()
     }
 
@@ -61,44 +66,29 @@ class ProgramTree(input: List<String>) {
         println(Bfs<String>().graphToString(tree, tree[tree.getRootId()]))
     }
 
-    private fun processInput(input: List<String>) {
-        var thisLine = ""
-        try {
-            // first pass: add nodes and weights
-            input.forEach { line ->
-                thisLine = line
-                // fwft (72) -> ktlj, cntj, xhth
-                val match = Regex("""([a-z]+)[ \t]\((\d+)\).*""").find(line)
-                val (name, wgt) = match!!.destructured
-                weightMap[name] = Integer.parseInt(wgt)
-                tree.addNode(name)
-            }
-            // second pass: add children
-            input.forEach { line ->
-                thisLine = line
-                // fwft (72) -> ktlj, cntj, xhth
-                val match = Regex("""([a-z]+)[ \t]\((\d+)\)(.*)""").find(line)
-                val (name, wgt, chldrn) = match!!.destructured
-                if (chldrn.isNotEmpty()) {
-                    weightMap[name] = Integer.parseInt(wgt)
-                    addChildern(name, chldrn)
-                }
-            }
+    private fun processPrograms() {
+        // first pass: add nodes and weights
+        programs.forEach { p ->
+            weightMap[p.id] = p.weight
+            tree.addNode(p.id)
         }
-        catch (e: Exception) {
-                throw AocException("bad input line $thisLine ${e.message}")
+        // second pass: add children
+        programs.forEach { p ->
+            p.children.filter { it.isNotEmpty() }.forEach { c -> tree.connect(p.id, c) }
         }
     }
 
-    private fun addChildern(node: String, chldrn: String) {
-        val match = Regex(""" -> (.*)""").find(chldrn)
-        try {
-            val (children) = match!!.destructured
-            children.split(Regex(", ")).forEach { chld ->
-                tree.connect(node, chld)
-            }
-        } catch (e: Exception) {
-            throw AocException("bad children info $chldrn ${e.message}")
-        }
+    companion object {
+        fun String.toJson() =
+            // jtbnzi (91) -> gpkrbvt, rhtin
+            // {"id":"jtbnzi","weight":91,"children":["gpkrbvt","rhtin"]}
+            this.replace(Regex("""^"""), """{"id":"""")
+                .replace(" (", """","weight":""")
+                .replace(Regex("""\)( -> )?"""), ""","children":["""")
+                .replace(Regex("""$"""), """"]}""")
+                .replace(Regex(", "), """","""")
     }
 }
+
+@Serializable
+data class Program(val id: String, val weight: Int, val children: List<String>)
