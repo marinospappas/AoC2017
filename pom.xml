@@ -8,8 +8,8 @@
 		<version>3.0.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>mpdev.springboot.aoc2023</groupId>
-	<artifactId>aoc2023</artifactId>
+	<groupId>mpdev.springboot.aoc2017</groupId>
+	<artifactId>aoc2017</artifactId>
 	<version>1.0.2-SNAPSHOT</version>
 	<name>aoc2023r</name>
 	<description>Advent of Code</description>

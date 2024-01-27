@@ -50,3 +50,17 @@ fun min(a1: Long, a2: Long, a3: Long, a4: Long): Long {
 
 fun String.isAnagram(other: String): Boolean =
     this.toCharArray().toList().sorted() == other.toCharArray().toList().sorted()
+
+fun Int.divisors() = this.toLong().divisors().map { it.toInt() }.toSet()
+
+fun Long.divisors(): Set<Long> {
+    val result = mutableSetOf<Long>()
+    for (i in 1L .. this)
+        if (this % i == 0L)
+            result.add(i)
+    return result
+}
+
+fun Int.isPrime() = this.toLong().isPrime()
+
+fun Long.isPrime() = this.divisors().size == 2
