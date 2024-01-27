@@ -1,8 +1,14 @@
 package mpdev.springboot.aoc2017.day07
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import mpdev.springboot.aoc2017.input.InputDataReader
 import mpdev.springboot.aoc2017.solutions.day07.Day07
+import mpdev.springboot.aoc2017.solutions.day07.Program
 import mpdev.springboot.aoc2017.solutions.day07.ProgramTree
+import mpdev.springboot.aoc2017.solutions.day07.ProgramTree.Companion.toJson
+import mpdev.springboot.aoc2017.utils.println
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Order
@@ -34,6 +40,19 @@ class Day07Test {
         val t = ProgramTree(inputLines)
         println(t.tree.getRootId())
         assertThat(puzzleSolver.day).isEqualTo(day)
+    }
+
+    @Test
+    @Order(1)
+    fun `Deserializes Input`() {
+        val p1 = Program("zkjxiqd", 44, listOf())
+        val p2 = Program("jtbnzi", 91, listOf("gpkrbvt","gpkrbvt"))
+        Json.encodeToString(listOf(p1,p2).also { it.println() })
+        val in1 = "zkjxiqd (44)"
+        val in2 = "jtbnzi (91) -> gpkrbvt, rhtin"
+        Json.decodeFromString<List<Program>>(
+            listOf(in1,in2).joinToString(",","[","]") { it.toJson() }
+        ).forEach { it.println() }
     }
 
     @Test

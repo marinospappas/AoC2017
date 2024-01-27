@@ -64,3 +64,6 @@ fun Long.divisors(): Set<Long> {
 fun Int.isPrime() = this.toLong().isPrime()
 
 fun Long.isPrime() = this.divisors().size == 2
+
+
+fun Any?.println() = println(this)
