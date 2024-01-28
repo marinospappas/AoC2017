@@ -37,7 +37,7 @@ class Day22: PuzzleSolver() {
     override fun solvePart2(): PuzzlePartSolution {
         val elapsed = measureTimeMillis {
             virus = Virus(inputData)
-            result = virus.solve2(10000000)
+            result = virus.solve1(10000000, true)
         }
         return PuzzlePartSolution(2, result.toString(), elapsed, "milli-sec")
     }

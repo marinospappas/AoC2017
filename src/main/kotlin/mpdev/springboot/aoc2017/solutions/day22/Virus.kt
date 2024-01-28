@@ -10,7 +10,7 @@ class Virus(input: List<String>) {
     val start = Point(grid.getDimensions().first / 2, grid.getDimensions().second / 2)
     val startDir = GridUtils.Direction.UP
 
-    fun solve1(count: Int): Int {
+    fun solve1(count: Int, part2: Boolean = false): Int {
         var infections = 0
         var curPosition = start
         var curDirection = startDir
@@ -18,32 +18,14 @@ class Virus(input: List<String>) {
             when (grid.getDataPoint(curPosition)) {
                 Node.INFECTED -> {
                     curDirection = curDirection.turnRight()
-                    grid.removeDataPoint(curPosition)
+                    if (part2)
+                        grid.setDataPoint(curPosition, Node.FLAGGED)
+                    else
+                        grid.removeDataPoint(curPosition)
                 }
-                else -> {
-                    curDirection = curDirection.turnLeft()
-                    grid.setDataPoint(curPosition, Node.INFECTED)
-                    infections++
-                }
-            }
-            curPosition += curDirection.increment
-        }
-        return infections
-    }
-
-    fun solve2(count: Int): Int {
-        var infections = 0
-        var curPosition = start
-        var curDirection = startDir
-        repeat(count) {
-            when (grid.getDataPoint(curPosition)) {
                 Node.WEAKENED -> {
                     grid.setDataPoint(curPosition, Node.INFECTED)
                     infections++
-                }
-                Node.INFECTED -> {
-                    curDirection = curDirection.turnRight()
-                    grid.setDataPoint(curPosition, Node.FLAGGED)
                 }
                 Node.FLAGGED -> {
                     curDirection = curDirection.reverse()
@@ -51,14 +33,18 @@ class Virus(input: List<String>) {
                 }
                 else -> {
                     curDirection = curDirection.turnLeft()
-                    grid.setDataPoint(curPosition, Node.WEAKENED)
+                    if (part2)
+                        grid.setDataPoint(curPosition, Node.WEAKENED)
+                    else {
+                        grid.setDataPoint(curPosition, Node.INFECTED)
+                        infections++
+                    }
                 }
             }
             curPosition += curDirection.increment
         }
         return infections
     }
-
 }
 
 enum class Node(val value: Char) {
