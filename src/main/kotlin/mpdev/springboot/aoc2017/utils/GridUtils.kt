@@ -92,6 +92,11 @@ object GridUtils {
         RIGHT(Point(1, 0)),
         DOWN(Point(0, 1)),
         LEFT(Point(-1, 0));
+        fun turn(leftRight: Int) = if (leftRight == 1) turnRight() else turnLeft()
+
+        fun turnRight() = when(this) { UP -> RIGHT; RIGHT -> DOWN;DOWN -> LEFT; LEFT -> UP }
+        fun turnLeft() = when(this) { UP -> LEFT; LEFT -> DOWN; DOWN -> RIGHT; RIGHT -> UP }
+        fun reverse() = when (this) { UP -> DOWN; RIGHT -> LEFT; DOWN -> UP; LEFT -> RIGHT }
         fun toString1() = when (this) { UP -> "U"; RIGHT -> "R"; DOWN -> "D"; LEFT -> "L" }
         fun toString2() = when (this) { UP -> "UP"; RIGHT -> "RIGHT"; DOWN -> "DOWN"; LEFT -> "LEFT" }
         fun toString3() = when (this) { UP -> "N"; RIGHT -> "E"; DOWN -> "S"; LEFT -> "W" }
@@ -109,7 +114,6 @@ object GridUtils {
             fun of(c: Char): Direction = of(c.toString())
             fun of(inc: Point): Direction =
                 values().firstOrNull { it.increment == inc } ?: throw AocException("invalid Direction increment: [$inc]")
-            fun oppositeOf(d: Direction) = when (d) { UP -> DOWN; RIGHT -> LEFT; DOWN -> UP; LEFT -> RIGHT }
         }
     }
 }

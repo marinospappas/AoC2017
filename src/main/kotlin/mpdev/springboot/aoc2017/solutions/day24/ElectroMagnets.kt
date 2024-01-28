@@ -15,7 +15,8 @@ class ElectroMagnets(input: List<String>) {
         if (length > longest) {
             longest = length
             longestStrength = strength
-        } else if (length == longest) {
+        }
+        else if (length == longest) {
             longestStrength = max(strength, longestStrength)
         }
         for (c in components) {
