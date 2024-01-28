@@ -1,8 +1,8 @@
 package mpdev.springboot.aoc2017.utils
 
 open class Grid<T>(inputGridVisual: List<String> = emptyList(),
-                   private val mapper: Map<Char,T>,
-                   private val border: Int = 1,
+                   val mapper: Map<Char,T>,
+                   val border: Int = 1,
                    private val defaultChar: Char = '.',
                    private val defaultSize: Pair<Int,Int> = Pair(-1,-1)) {
 
@@ -56,6 +56,8 @@ open class Grid<T>(inputGridVisual: List<String> = emptyList(),
             maxX = 0; maxY = 0; minX = 0; minY = 0
         }
     }
+
+    fun isInsideGrid(p: Point) = p.x in minX..maxX && p.y in minY..maxY
 
     fun getDataPoints() = data.toMap()
     open fun getDataPoint(p: Point) = data[p]
@@ -145,16 +147,16 @@ open class Grid<T>(inputGridVisual: List<String> = emptyList(),
             print("${String.format("%2d",i%100)} ")
             for (j in grid.first().indices)
                 print(grid[i][j])
-            println()
+            println("")
         }
         print("   ")
         for (i in grid.first().indices)
             print(if (i%10 == 0) (i/10)%10 else " ")
-        println()
+        println("")
         print("   ")
         for (i in grid.first().indices)
             print(i%10)
-        println()
+        println("")
     }
 
 }
