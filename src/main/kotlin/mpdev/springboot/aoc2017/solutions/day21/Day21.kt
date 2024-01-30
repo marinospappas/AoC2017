@@ -18,25 +18,25 @@ class Day21: PuzzleSolver() {
     }
 
     var result = 0
-    lateinit var patternEnhancer: PatternEnhancer
+    lateinit var patternEnhancer: PatternEnhancerV2
 
     override fun initSolver(): Pair<Long,String> {
         val elapsed = measureNanoTime {
-            patternEnhancer = PatternEnhancer(inputData)
+            patternEnhancer = PatternEnhancerV2(inputData)
         }
         return Pair(elapsed/1000, "micro-sec")
     }
 
     override fun solvePart1(): PuzzlePartSolution {
         val elapsed = measureTimeMillis {
-            result = patternEnhancer.enhance(5).sumOf { it.countOneBits() }
+            result = patternEnhancer.solve1()
         }
         return PuzzlePartSolution(1, result.toString(), elapsed, "milli-sec")
     }
 
     override fun solvePart2(): PuzzlePartSolution {
         val elapsed = measureTimeMillis {
-            //result = patternEnhancer.enhance(18).sumOf { it.countOneBits() }
+            result = patternEnhancer.solve2()
         }
         return PuzzlePartSolution(2, result.toString(), elapsed, "milli-sec")
     }
