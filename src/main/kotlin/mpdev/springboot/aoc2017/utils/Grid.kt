@@ -12,6 +12,7 @@ open class Grid<T>(inputGridVisual: List<String> = emptyList(),
     protected var minX: Int = 0
     protected var minY: Int = 0
     protected var DEFAULT_CHAR: Char
+    protected val defaultSymbol = mapper[defaultChar]
 
     init {
         if (inputGridVisual.isNotEmpty()) {
@@ -92,16 +93,38 @@ open class Grid<T>(inputGridVisual: List<String> = emptyList(),
        updateXYDimensions(border)
     }
 
+    fun flipV(): Grid<T> {
+        val tempData = data.toMap()
+        data.clear()
+        tempData.forEach { (k, v) -> data[Point(maxX - k.x, k.y)] = v }
+        return this
+    }
+
+    fun flipH(): Grid<T> {
+        val tempData = data.toMap()
+        data.clear()
+        tempData.forEach { (k, v) -> data[Point(k.x, maxY - k.y)] = v }
+        return this
+    }
+
+    fun rotate(): Grid<T> {
+        val tempData = data.toMap()
+        data.clear()
+        tempData.forEach { (k, v) -> data[Point(k.y, k.x)] = v }
+        return this
+    }
+
     // mapping of a column or a row to int by interpreting the co-ordinates as bit positions
     fun mapRowToInt(n: Int, predicate: (T) -> Boolean = { true }) =
-        data.filter { e -> predicate(e.value) && e.key.y == n }.map { e -> bitToInt[e.key.x] }
+        data.filter { e -> predicate(e.value) && e.value != defaultSymbol && e.key.y == n }.map { e -> bitToInt[e.key.x] }
             .fold(0) { acc, i -> acc + i }
 
     fun mapColToInt(n: Int, predicate: (T) -> Boolean = { true }) =
-        data.filter { e -> predicate(e.value) && e.key.x == n }.map { e -> bitToInt[e.key.y] }
+        data.filter { e -> predicate(e.value) && e.value != defaultSymbol && e.key.x == n }.map { e -> bitToInt[e.key.y] }
             .fold(0) { acc, i -> acc + i }
 
     companion object {
+        val allCharsDefMapper = (' '..'~').associateWith { it }
         private val bitToInt = intArrayOf( 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
             65536, 131072, 262144, 524288, 1_048_576, 2_097_152, 4_194_304, 8_388_608,
             16_777_216, 33_554_432, 67_108_864, 134_217_728, 268_435_456, 536_870_912, 1_073_741_824 )

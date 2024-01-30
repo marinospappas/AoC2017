@@ -41,7 +41,7 @@ class Day22Test {
 
     @Test
     @Order(3)
-    fun `Simulates Particle Movement`() {
+    fun `Simulates Virus Spreading`() {
         val virus = Virus(inputLines)
         val result = virus.solve1(70)
         virus.grid.updateDimensions()

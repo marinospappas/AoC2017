@@ -10,7 +10,7 @@ import kotlin.system.measureTimeMillis
 class Day21: PuzzleSolver() {
 
     final override fun setDay() {
-        day = 20
+        day = 21
     }
 
     init {
@@ -29,13 +29,14 @@ class Day21: PuzzleSolver() {
 
     override fun solvePart1(): PuzzlePartSolution {
         val elapsed = measureTimeMillis {
-            result = patternEnhancer.enhance()
+            result = patternEnhancer.enhance(5).sumOf { it.countOneBits() }
         }
         return PuzzlePartSolution(1, result.toString(), elapsed, "milli-sec")
     }
 
     override fun solvePart2(): PuzzlePartSolution {
         val elapsed = measureTimeMillis {
+            //result = patternEnhancer.enhance(18).sumOf { it.countOneBits() }
         }
         return PuzzlePartSolution(2, result.toString(), elapsed, "milli-sec")
     }
