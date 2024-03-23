@@ -108,8 +108,8 @@ class PatternEnhancerV2(input: List<String>) {
         return temp
     }
 
-    private fun putSub(box: Array<BooleanArray>?, index: Int) {
-        val divs = grid.size / box!!.size
+    private fun putSub(box: Array<BooleanArray>, index: Int) {
+        val divs = grid.size / box.size
         for (i in box.indices) {
             for (j in box.indices) {
                 val y = i + index % divs * box.size
